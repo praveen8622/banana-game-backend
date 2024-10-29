@@ -14,7 +14,7 @@ class User(Base):
     hashed_password = Column(String)
 
     login_info = relationship("UserLogin", uselist=False, back_populates="user")
-    # games = relationship("Game", back_populates="user")
+    games = relationship("Game", back_populates="user")
 
 
 class UserLogin(Base):
@@ -26,3 +26,14 @@ class UserLogin(Base):
 
     user_id = Column(Integer, ForeignKey("users.id"))
     user = relationship("User", back_populates="login_info")
+
+
+class Game(Base):
+    __tablename__ = "games"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    last_played = Column(DateTime, default=datetime.utcnow)
+    total_games_played = Column(Integer, default=0)
+
+    user = relationship("User", back_populates="games")

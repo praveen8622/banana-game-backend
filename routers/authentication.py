@@ -33,11 +33,6 @@ def login(
 
 
 @router.get("/home")
-async def home():
-    return {"message": "Hello, you are successfully connected to the home route!"}
-
-
-@router.get("/home")
 async def home(current_user: models.User = Depends(JWTtoken.get_current_user)):
     return {
         "message": f"Hello, {current_user.username}, you are successfully logged in!"
