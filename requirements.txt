@@ -36,3 +36,4 @@ websockets==12.0
 sqlalchemy
 passlib
 psycopg2
+python-jose 
