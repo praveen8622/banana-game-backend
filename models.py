@@ -14,7 +14,7 @@ class User(Base):
     hashed_password = Column(String)
 
     login_info = relationship("UserLogin", uselist=False, back_populates="user")
-    games = relationship("Game", back_populates="user")
+    # games = relationship("Game", back_populates="user")
 
 
 class UserLogin(Base):
