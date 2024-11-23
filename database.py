@@ -6,16 +6,20 @@ import os
 
 load_dotenv()
 
-# Get database URL from environment variables
+# Database URL retrieved from environment variables
 SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL")
 
-# Set up the SQLAlchemy engine and session
+# Create SQLAlchemy engine and session
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
-# Dependency to get a database session
+
 def get_db():
+    """
+    Dependency function to create and close database sessions.
+    - Yields: Database session
+    """
     db = SessionLocal()
     try:
         yield db
