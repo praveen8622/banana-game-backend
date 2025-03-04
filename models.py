@@ -17,17 +17,6 @@ class User(Base):
     games = relationship("Game", back_populates="user")
 
 
-class UserLogin(Base):
-    __tablename__ = "user_login"
-
-    id = Column(Integer, primary_key=True, index=True)
-    username = Column(String, unique=True, index=True)
-    hashed_password = Column(String)
-
-    user_id = Column(Integer, ForeignKey("users.id"))
-    user = relationship("User", back_populates="login_info")
-
-
 class Game(Base):
     __tablename__ = "games"
 
@@ -37,3 +26,14 @@ class Game(Base):
     total_games_played = Column(Integer, default=0)
 
     user = relationship("User", back_populates="games")
+
+
+class UserLogin(Base):
+    __tablename__ = "user_login"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, index=True)
+    hashed_password = Column(String)
+
+    user_id = Column(Integer, ForeignKey("users.id"))
+    user = relationship("User", back_populates="login_info")
